@@ -55,6 +55,7 @@ Page({
   onShareAppMessage() {},
 
   fetchToken() {
+    wx.showLoading();
     return new Promise((resolve, reject) => {
       wx.request({
         url: 'https://www.hkmpcl.com.hk/hktvwebservices/oauth/token',
@@ -64,12 +65,19 @@ Page({
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         data: { grant_type: 'client_credentials' },
-        success: function (rsp) {
-          const token = rsp.data;
-          resolve(`${token.token_type} ${token.access_token}`);
+        success: function (res) {
+          if (res.statusCode === 200) {
+            const token = res.data;
+            resolve(`${token.token_type} ${token.access_token}`);
+          } else {
+            reject(res);
+          }
         },
-        fail: (err) => {
-          reject(err);
+        fail: (res) => {
+          reject(res);
+        },
+        complete: function (res) {
+          wx.hideLoading();
         },
       });
     });
