@@ -5,7 +5,8 @@ export function fetchHome() {
   const swiper = [];
   return new Promise((resolve, reject) => {
     wx.request({
-      url: 'https://www.hktvmall.com/hktvwebservices/v1/hktv/get_toysnbooks_landing?lang=zh',
+      // url: 'https://www.hktvmall.com/hktvwebservices/v1/hktv/get_toysnbooks_landing?lang=zh',
+      url: 'https://www.hktvmall.com/hktvwebservices/v1/hktv/get_supermarket_landing?lang=zh',
       header: {
         Authorization: app.globalData.token,
       },

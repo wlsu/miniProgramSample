@@ -1,2 +1,2 @@
 <!--pages/swiperWebview/swiperWebview.wxml-->
-<text>pages/swiperWebview/swiperWebview.wxml</text>
+<web-view src="{{webView_URL}}" />

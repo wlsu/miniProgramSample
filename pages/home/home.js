@@ -138,10 +138,10 @@ Page({
     });
   },
 
-  navToSwiperWebview() {
-    console.log('navToSwiperWebview', 'navToSwiperWebview');
+  navToSwiperWebview(options) {
+    console.log('navToSwiperWebview', options.currentTarget.dataset);
     wx.navigateTo({
-      url: `/pages/swiperWebview/swiperWebview`,
+      url: `/pages/swiperWebview/swiperWebview?url=` + encodeURIComponent(options.currentTarget.dataset.url),
     });
   },
 });

@@ -10,7 +10,7 @@
   <view class="swiper-wrap">
     <swiper indicator-dots="true" autoplay="{{autoplay}}" interval="5000" duration="1250">
       <block wx:for="{{imgSrcs}}" wx:key="unique">
-        <swiper-item bind:tap="navToSwiperWebview">
+        <swiper-item bind:tap="navToSwiperWebview" data-url="{{item.clickThroughUrl}}">
           <image id="{{item.mabsRefId}}" style="height:100%; width: 100%" src="{{item.image.url}}" />
         </swiper-item>
       </block>
