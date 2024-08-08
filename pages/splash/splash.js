@@ -9,11 +9,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    const app = getApp();
     this.fetchToken().then((token) => {
-      this.globalData = {
+      app.globalData = {
         token: token,
       };
-      if (this.globalData.token) {
+      if (app.globalData.token) {
         this.navToHome();
       }
     });
@@ -58,13 +59,15 @@ Page({
     wx.showLoading();
     return new Promise((resolve, reject) => {
       wx.request({
-        url: 'https://www.hkmpcl.com.hk/hktvwebservices/oauth/token',
+        url: 'https://www.hktvmall.com/hktvwebservices/oauth/token',
         method: 'POST',
         header: {
-          Authorization: 'Basic aGt0dl9pb3M6SCphSyMpSE0yNDg=',
+          Authorization: 'Basic aGt0dl9pb3M6SCphSyMpSE0yNDg=', // ios
           'Content-Type': 'application/x-www-form-urlencoded',
         },
-        data: { grant_type: 'client_credentials' },
+        data: {
+          grant_type: 'client_credentials',
+        },
         success: function (res) {
           if (res.statusCode === 200) {
             const token = res.data;
@@ -84,6 +87,8 @@ Page({
   },
 
   navToHome() {
-    wx.switchTab({ url: '/pages/home/home' });
+    wx.switchTab({
+      url: '/pages/home/home',
+    });
   },
 });

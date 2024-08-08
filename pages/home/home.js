@@ -13,8 +13,12 @@ Page({
     autoplay: true,
     duration: '500',
     interval: 5000,
-    navigation: { type: 'dots' },
-    swiperImageProps: { mode: 'scaleToFill' },
+    navigation: {
+      type: 'dots',
+    },
+    swiperImageProps: {
+      mode: 'scaleToFill',
+    },
   },
 
   goodListPagination: {
@@ -54,9 +58,8 @@ Page({
     this.setData({
       pageLoading: true,
     });
-    fetchHome().then(({ swiper, tabList }) => {
+    fetchHome().then(({ swiper }) => {
       this.setData({
-        tabList,
         imgSrcs: swiper,
         pageLoading: false,
       });
@@ -80,7 +83,9 @@ Page({
       });
     }
 
-    this.setData({ goodsListLoadStatus: 1 });
+    this.setData({
+      goodsListLoadStatus: 1,
+    });
 
     const pageSize = this.goodListPagination.num;
     let pageIndex = this.privateData.tabIndex * pageSize + this.goodListPagination.index + 1;
@@ -98,7 +103,9 @@ Page({
       this.goodListPagination.index = pageIndex;
       this.goodListPagination.num = pageSize;
     } catch (err) {
-      this.setData({ goodsListLoadStatus: 3 });
+      this.setData({
+        goodsListLoadStatus: 3,
+      });
     }
   },
 
@@ -119,13 +126,22 @@ Page({
   },
 
   navToSearchPage() {
-    wx.navigateTo({ url: '/pages/goods/search/index' });
+    wx.navigateTo({
+      url: '/pages/goods/search/index',
+    });
   },
 
   navToActivityDetail({ detail }) {
     const { index: promotionID = 0 } = detail || {};
     wx.navigateTo({
       url: `/pages/promotion-detail/index?promotion_id=${promotionID}`,
+    });
+  },
+
+  navToSwiperWebview() {
+    console.log('navToSwiperWebview', 'navToSwiperWebview');
+    wx.navigateTo({
+      url: `/pages/swiperWebview/swiperWebview`,
     });
   },
 });
